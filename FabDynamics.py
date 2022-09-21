@@ -15,7 +15,7 @@ add_local_paths("FabDynamics")
 
 
 @task
-def dummy(config, **args):
+def dynamics(config, **args):
     """Submit a Dummy job to the remote queue.
     The job results will be stored with a name pattern as defined in the environment,
     e.g. cylinder-abcd1234-legion-256
@@ -34,7 +34,7 @@ def dummy(config, **args):
 
 
 @task
-def dummy_ensemble(config="dummy_test", **args):
+def dynamics_ensemble(config="dummy_test", **args):
     """
     Submits an ensemble of dummy jobs.
     One job is run for each file in <config_file_directory>/dummy_test/SWEEP.
@@ -50,7 +50,7 @@ def dummy_ensemble(config="dummy_test", **args):
 
 
 @task
-def lammps_dummy(config, **args):
+def dynamics_dummy(config, **args):
     """Submit a LAMMPS job to the remote queue.
     The job results will be stored with a name pattern as defined in the environment,
     e.g. cylinder-abcd1234-legion-256
