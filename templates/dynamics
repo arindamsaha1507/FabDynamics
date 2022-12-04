@@ -1,7 +1,7 @@
-# FabDummy Exec Template: 
+# FabDynamics Exec Template: 
 cd $job_results
 $run_prefix
 
 /usr/bin/env > env.log
 echo "Starting dummy job, which will print the contents of dummy.txt."
-python3 /home/arindam/dynamics/run.py
+python3 $dynamics_location/$dynamics_script

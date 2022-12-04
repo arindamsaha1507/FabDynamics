@@ -15,8 +15,11 @@ add_local_paths("FabDynamics")
 
 
 @task
-def dynamics(config, **args):
-    """Submit a Dummy job to the remote queue.
+@load_plugin_env_vars("FabDynamics")
+def dynamics(config,
+            dynamics_script='run.py',
+            **args):
+    """Submit a job to the remote queue.
     The job results will be stored with a name pattern as defined in the environment,
     e.g. cylinder-abcd1234-legion-256
     config : config directory to use to define input files, e.g. config=cylinder
@@ -27,13 +30,14 @@ def dynamics(config, **args):
             wall_time : wall-time job limit
             memory : memory per node
     """
-    update_environment(args)
+    update_environment(args, {"dynamics_script": dynamics_script})
     with_config(config)
     execute(put_configs, config)
     job(dict(script='dynamics', wall_time='0:15:0', memory='2G'), args)
 
 
 @task
+@load_plugin_env_vars("FabDynamics")
 def dynamics_ensemble(config="dummy_test", **args):
     """
     Submits an ensemble of dummy jobs.
@@ -50,6 +54,7 @@ def dynamics_ensemble(config="dummy_test", **args):
 
 
 @task
+@load_plugin_env_vars("FabDynamics")
 def dynamics_dummy(config, **args):
     """Submit a LAMMPS job to the remote queue.
     The job results will be stored with a name pattern as defined in the environment,

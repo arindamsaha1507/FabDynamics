@@ -1,0 +1,4 @@
+localhost:
+
+  # location of dynamics in your local PC
+  dynamics_location: "/home/arindam/dynamics"
