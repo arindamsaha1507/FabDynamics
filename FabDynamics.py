@@ -31,6 +31,9 @@ def dynamics(config,
             memory : memory per node
     """
     update_environment(args, {"dynamics_script": dynamics_script})
+    
+    set_dynamics_args_list(args)
+    
     with_config(config)
     execute(put_configs, config)
     job(dict(script='dynamics', wall_time='0:15:0', memory='2G'), args)
@@ -70,3 +73,19 @@ def dynamics_dummy(config, **args):
     with_config(config)
     execute(put_configs, config)
     job(dict(script='lammps', wall_time='0:15:0', lammps_input="in.CG.lammps"), args)
+
+def set_dynamics_args_list(*dicts):
+
+    for adict in dicts:
+        for key in env.dynamics_args.keys():
+            if key in adict:
+                env.dynamics_args[key] = adict[key]
+
+    env.dynamics_args_list = ""
+    for key, value in env.dynamics_args.items():
+        if isinstance(value, (list)):
+            env.dynamics_args_list += '  '.join(value)
+        else:
+            env.dynamics_args_list += " --%s=%s " % (key, value)
+
+    print("Dynamics prepared with args list:", env.dynamics_args_list)

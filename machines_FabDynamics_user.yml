@@ -1,3 +1,10 @@
+default:
+
+  dynamics_args:
+
+    ode_system: 'fhn'
+    outfile: 'timeseries.csv'
+
 localhost:
 
   # location of dynamics in your local PC

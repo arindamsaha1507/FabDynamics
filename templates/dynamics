@@ -4,4 +4,4 @@ $run_prefix
 
 /usr/bin/env > env.log
 echo "Starting dummy job, which will print the contents of dummy.txt."
-python3 $dynamics_location/$dynamics_script
+python3 $dynamics_location/$dynamics_script $dynamics_args_list
