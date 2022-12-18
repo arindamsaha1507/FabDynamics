@@ -41,18 +41,24 @@ def dynamics(config,
 
 @task
 @load_plugin_env_vars("FabDynamics")
-def dynamics_ensemble(config="dummy_test", **args):
+def dynamics_ensemble(config="testing", 
+                    dynamics_script='run.py',
+                    **args):
     """
     Submits an ensemble of dummy jobs.
     One job is run for each file in <config_file_directory>/dummy_test/SWEEP.
     """
 
-    path_to_config = find_config_file_path(config)
-    print("local config file path at: %s" % path_to_config)
-    sweep_dir = path_to_config + "/SWEEP"
-    env.script = 'dummy'
-    env.input_name_in_config = 'dummy.txt'
+    update_environment(args, {"dynamics_script": dynamics_script})
+
     with_config(config)
+
+    set_dynamics_args_list(args)
+
+    path_to_config = find_config_file_path(config)
+    sweep_dir = path_to_config + "/SWEEP"
+    env.script = "dynamics"
+
     run_ensemble(config, sweep_dir, **args)
 
 
