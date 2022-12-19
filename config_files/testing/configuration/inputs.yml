@@ -1,10 +1,8 @@
 parameters:
-  a: 0.7
-  b: 0.8
-  c: 12.5
+  r: 0.7
+  p: 0.8
 initial_conditions:
   x: 0.1
-  y: 0.1
 time:
   ti: 0.0
   tf: 1000.0

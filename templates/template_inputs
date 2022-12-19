@@ -1,7 +1,7 @@
 parameters:
-  a: 0.7
-  b: 0.8
-  c: 12.5
+  a: $a
+  b: $b
+  c: $c
 initial_conditions:
   x: 0.1
   y: 0.1

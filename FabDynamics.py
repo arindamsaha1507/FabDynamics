@@ -95,3 +95,6 @@ def set_dynamics_args_list(*dicts):
             env.dynamics_args_list += " --%s=%s " % (key, value)
 
     print("Dynamics prepared with args list:", env.dynamics_args_list)
+
+from plugins.FabDynamics.SA.dyn_sa import dyn_init_SA
+from plugins.FabDynamics.SA.dyn_sa import dyn_analyse_SA
