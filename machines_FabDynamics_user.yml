@@ -2,7 +2,6 @@ default:
 
   dynamics_args:
 
-    ode_system: 'fhn'
     outfile: 'timeseries.csv'
 
 localhost:

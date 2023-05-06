@@ -30,6 +30,9 @@ def dynamics(config,
             wall_time : wall-time job limit
             memory : memory per node
     """
+
+    print(env)
+
     update_environment(args, {"dynamics_script": dynamics_script})
     
     set_dynamics_args_list(args)
