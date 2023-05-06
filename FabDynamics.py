@@ -5,10 +5,19 @@
 #
 # This file contains FabSim definitions specific to FabDummy.
 
-try:
-    from fabsim.base.fab import *
-except ImportError:
-    from base.fab import *
+from fabsim.base.fab import (
+    add_local_paths,
+    env,
+    execute,
+    find_config_file_path,
+    job,
+    load_plugin_env_vars,
+    put_configs,
+    run_ensemble,
+    task,
+    update_environment,
+    with_config,
+)
 
 # Add local script, blackbox and template path.
 add_local_paths("FabDynamics")
@@ -16,9 +25,7 @@ add_local_paths("FabDynamics")
 
 @task
 @load_plugin_env_vars("FabDynamics")
-def dynamics(config,
-            dynamics_script='run.py',
-            **args):
+def dynamics(config, dynamics_script="run.py", **args):
     """Submit a job to the remote queue.
     The job results will be stored with a name pattern as defined in the environment,
     e.g. cylinder-abcd1234-legion-256
@@ -34,19 +41,17 @@ def dynamics(config,
     print(env)
 
     update_environment(args, {"dynamics_script": dynamics_script})
-    
+
     set_dynamics_args_list(args)
-    
+
     with_config(config)
     execute(put_configs, config)
-    job(dict(script='dynamics', wall_time='0:15:0', memory='2G'), args)
+    job(dict(script="dynamics", wall_time="0:15:0", memory="2G"), args)
 
 
 @task
 @load_plugin_env_vars("FabDynamics")
-def dynamics_ensemble(config="testing", 
-                    dynamics_script='run.py',
-                    **args):
+def dynamics_ensemble(config="testing", dynamics_script="run.py", **args):
     """
     Submits an ensemble of dummy jobs.
     One job is run for each file in <config_file_directory>/dummy_test/SWEEP.
@@ -81,10 +86,10 @@ def dynamics_dummy(config, **args):
     """
     with_config(config)
     execute(put_configs, config)
-    job(dict(script='lammps', wall_time='0:15:0', lammps_input="in.CG.lammps"), args)
+    job(dict(script="lammps", wall_time="0:15:0", lammps_input="in.CG.lammps"), args)
+
 
 def set_dynamics_args_list(*dicts):
-
     for adict in dicts:
         for key in env.dynamics_args.keys():
             if key in adict:
@@ -93,11 +98,11 @@ def set_dynamics_args_list(*dicts):
     env.dynamics_args_list = ""
     for key, value in env.dynamics_args.items():
         if isinstance(value, (list)):
-            env.dynamics_args_list += '  '.join(value)
+            env.dynamics_args_list += "  ".join(value)
         else:
             env.dynamics_args_list += " --%s=%s " % (key, value)
 
     print("Dynamics prepared with args list:", env.dynamics_args_list)
 
-from plugins.FabDynamics.SA.dyn_sa import dyn_init_SA
-from plugins.FabDynamics.SA.dyn_sa import dyn_analyse_SA
+
+from plugins.FabDynamics.SA.dyn_sa import dyn_analyse_SA, dyn_init_SA

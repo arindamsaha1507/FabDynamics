@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def ode(x, t, p):
 
     assert len(x) == 2
