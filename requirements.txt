@@ -4,6 +4,6 @@ matplotlib
 numpy
 pandas
 plotly
-ruamel
+ruamel.yaml
 pyyaml
 scipy
