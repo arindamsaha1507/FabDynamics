@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# User defined
+machines_FabDynamics_user.yml
