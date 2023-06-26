@@ -16,7 +16,6 @@ import easyvvuq as uq
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import plotly.express as px
 import ruamel.yaml
 import yaml
 from plugins.FabDynamics.FabDynamics import *
